@@ -1,6 +1,17 @@
 # Homework 11 - Note Taker
 
-## routes
+## setup
+```
+git clone https://github.com/DustinAlandzes/homework-11-note-taker-tdd.git
+npm i
+```
+
+## how to run tests
+```
+npm run test
+```
+
+## routes you need to implement
   * GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
 
   * POST `/api/notes` - Should recieve a new note to save on the request body, add it to the `db.json` file, and then return the new note to the client.
