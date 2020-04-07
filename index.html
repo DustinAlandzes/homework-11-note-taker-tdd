@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, World!</title>
+</head>
+<body>
+    <div id="reactRoot"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/jsx">
+        class App extends React.Component {
+            constructor() {
+                super()
+                this.state = {BASE_URL: "https://warm-castle-59349.herokuapp.com/"};
+                this.getNotes();
+            }
+
+            getNotes() {
+                const {BASE_URL} = this.state
+                fetch(`${BASE_URL}/api/notes`)
+                    .then(response => response.json())
+                    .then(console.log)
+                    .catch(console.error)
+            }
+
+            addNote(text) {
+                const {BASE_URL} = this.state
+                fetch(`${BASE_URL}/api/notes`, {method: 'POST', body: {text: text}})
+                    .then(response => response.json())
+                    .then(console.log)
+                    .catch(console.error)
+            }
+
+            removeNote(id) {
+                const {BASE_URL} = this.state
+                fetch(`${BASE_URL}/api/notes/${id}`, {method: 'POST'})
+                    .then(response => response.json())
+                    .then(console.log)
+                    .catch(console.error)
+            }
+            render() {
+                return (
+                    <h1>Hello</h1>
+                )
+            }
+        }
+
+        ReactDOM.render(<App/>, document.querySelector('#reactRoot'));
+    </script>
+</body>
+</html>
