@@ -42,7 +42,14 @@
 
         addNote() {
             const {BASE_URL, currentNote} = this.state
-            fetch(`${BASE_URL}/api/notes`, {method: 'POST', body: JSON.stringify({text: currentNote})})
+            fetch(`${BASE_URL}/api/notes`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({text: currentNote})
+            })
                 .then(response => response.json())
                 .then(notes => this.setState({notes: notes}))
                 .catch(console.error)
@@ -68,17 +75,20 @@
                 <div className="container">
                     <div className="row">
                         <h1 className="mr-5">Note Taker</h1>
-                        <input className="form-control" type="text" placeholder="Text for note" value={currentNote} onChange={evt => this.updateInputValue(evt)}/>
-                        <button className="btn btn-primary btn-lg" onClick={() => this.addNote()} >Add Note</button>
+                        <input className="form-control" type="text" placeholder="Text for note" value={currentNote}
+                               onChange={evt => this.updateInputValue(evt)}/>
+                        <button className="btn btn-primary btn-lg" onClick={() => this.addNote()}>Add Note</button>
                     </div>
-                    <div className="row">
-                        {notes.map((note, idx) => (
-                            <div key={idx} className="col">
-                                <h2>{note.text}</h2>
-                                <button className="btn btn-danger btn-lg ml-2" onClick={() => this.removeNote(note.id)}>Delete</button>
+                    {notes.map((note, idx) => (
+                        <div key={idx} className="row mt-5">
+                            <div className="col"><h2>{note.text}</h2></div>
+                            <div className="col">
+                                <button className="btn btn-danger btn-lg ml-2"
+                                        onClick={() => this.removeNote(note.id)}>Delete
+                                </button>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             )
         }
