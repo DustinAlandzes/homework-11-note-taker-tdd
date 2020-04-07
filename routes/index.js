@@ -3,10 +3,6 @@ const router = express.Router();
 
 let notes = [];
 
-router.get('/', function(req, res) {
-  return res.json({"hello": "world!"});
-});
-
 router.get('/api/notes/', (req, res) => {
   return res.json(notes);
 });

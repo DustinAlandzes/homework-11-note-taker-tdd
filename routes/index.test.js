@@ -1,12 +1,6 @@
 const app = require('../app');
 const request = require('supertest');
 
-test('GET / returns Hello World', () => {
-    return request(app).get('/').then(response => {
-        expect(response.body).toEqual({'hello': 'world!'});
-    })
-});
-
 describe('api', () => {
     test('GET /api/notes return return an empty list', (done) => {
         request(app)
