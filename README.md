@@ -4,6 +4,7 @@
 ```
 git clone https://github.com/DustinAlandzes/homework-11-note-taker-tdd.git
 npm i
+npm run start
 ```
 
 ## how to run tests
