@@ -50,7 +50,7 @@
 
         removeNote(id) {
             const {BASE_URL} = this.state
-            fetch(`${BASE_URL}/api/notes/${id}`, {method: 'POST'})
+            fetch(`${BASE_URL}/api/notes/${id}`, {method: 'DELETE'})
                 .then(response => response.json())
                 .then(notes => this.setState({notes: notes}))
                 .catch(console.error)
@@ -73,7 +73,10 @@
                     </div>
                     <div className="row">
                         {notes.map((note, idx) => (
-                            <h2 key={idx}>{note.id}</h2>
+                            <div key={idx} className="col">
+                                <h2>{note.text}</h2>
+                                <button className="btn btn-danger btn-lg ml-2" onClick={() => this.removeNote(note.id)}>Delete</button>
+                            </div>
                         ))}
                     </div>
                 </div>
